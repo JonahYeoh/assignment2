@@ -1,0 +1,267 @@
+	<html>
+		<head>
+			<title>慢性腎臟病新病患護理檢查表格</title>
+			<meta content="Microsoft FrontPage 5.0" name="GENERATOR">
+			<meta content="FrontPage.Editor.Document" name="ProgId">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<script language="javascript">
+			var patient= {"name":"Chalmers", "telecom":12345678, "gender": "male", "birthDate": "1974-12-25", "race":"chinese", "address":"Taman Krsytal",
+							"nric":"6060", "registrationID":"123456789", "relativeName":"Boon Hua"};  
+			var patient2 = { "name":"123", "telecom":"abc", "gender":"default", "birthDate":"abc", "race":"default", "nric":"abcdefg" };
+			function loadPatient1() {
+				document.getElementById( "cName" ).value = patient.name;
+				document.getElementById( "cNumber" ).value = patient.telecom;
+				document.getElementById( "genderm" ).checked = patient.gender;
+				document.getElementById( "dob" ).value = patient.birthDate;
+				document.getElementById( "race" ).value = patient.race;
+				document.getElementById( "address" ).value = patient.address;
+				document.getElementById( "nric" ).value = patient.nric;
+				document.getElementById( "rID" ).value = patient.registrationID;
+				document.getElementById( "relativeName_family" ).value = patient.relativeName;
+			}
+			function loadPatient2() {
+				document.getElementById( "cName" ).value = patient2.name;
+				document.getElementById( "cNumber" ).value = patient2.telecom;
+				document.getElementById( "dob" ).value = patient2.birthDate;
+				document.getElementById( "race" ).value = patient2.race;
+				document.getElementById( "nric" ).value = patient2.nric;
+			}
+			function alertForm() {
+				var j, k;
+				j = k = 0;
+				var newline = "\r\n";
+				var rstr = "";
+				var wstr = "";
+				var estr = "";
+				var cstr = "";
+				clientName = document.getElementById( "cName" ).value;
+				contactNumber = document.getElementById( "cNumber" ).value;
+				var gender = "";
+				if (document.getElementById( "genderm" ).checked) { gender = document.getElementById( "genderm" ).value; }
+				if (document.getElementById( "genderf" ).checked) { gender = document.getElementById( "genderf" ).value; }
+				race = document.getElementById( "race" ).value;
+				dob = document.getElementById( "dob" ).value;
+				registrationID = document.getElementById( "rID" ).value;
+				nric = document.getElementById( "nric" ).value;
+				address = document.getElementById( "address" ).value;
+				relativeName = document.getElementById( "relativeName_family" ).value;
+				
+				if ( clientName != "" ) {
+					if ( isNaN(clientName) ) {
+						rstr += "Client Name was entered correctly" + newline;
+					}
+					else {
+						wstr += "Client Name was entered wrongly" + newline;
+					}
+				}
+				else {
+					estr += "Field Client Name was empty" + newline;
+				}
+				
+				if ( contactNumber != "" ) {
+					if ( isNaN(contactNumber) ) {
+						wstr += "Contact Number was entered wrongly" + newline;
+					}
+					else {
+						rstr += "Contact Number was entered correctly" + newline;
+					}
+				}
+				else {
+					estr += "Field Contact Number was empty" + newline;
+				}
+				
+				if ( gender == "male" || gender == "female" ) {
+					rstr += "Gender was entered correctly" + newline;
+				}
+				else {
+					estr += "Field Gender was empty" + newline;
+				}
+				
+				if ( race != "default" ) {
+					rstr += "Race was entered correctly" + newline;
+				}
+				else {
+					estr += "Field Race was empty" + newline;
+				}
+				
+				if ( dob != "" ) {
+					rstr += "Date of Birth was entered correctly" + newline;
+				}
+				else {
+					estr += "Field Date of Birth was empty" + newline;
+				}
+				
+				if ( registrationID != "" ) {
+					if ( isNaN( registrationID) ) {
+						wstr += "Registration ID was entered wrongly" + newline;
+					}
+					else { 
+						rstr += "Registration ID was entered correctly" + newline;
+					}
+				}
+				else {
+					estr += "Field Registration ID was empty" + newline;
+				}
+				
+				if ( nric != "" ) {
+					if ( isNaN( nric) ) {
+						wstr += "NRIC was entered wrongly" + newline;
+					}
+					else { 
+						rstr += "NRIC was entered correctly" + newline;
+					}
+				}
+				else {
+					estr += "Field NRIC was empty" + newline;
+				}
+				
+				if ( address == "" ) {
+					estr += "Field Address was empty" + newline;
+				}
+				
+				if ( relativeName == "" ) {
+					estr += "Field Name of Relative was empty" + newline;
+				}
+
+				rstr += newline;
+				wstr += newline;
+				estr += newline;
+				cstr = rstr + wstr + estr;
+				alert( cstr );	
+			}
+			
+			function getData() {
+				var str = "";
+				var newline = "\r\n";
+				clientName = document.getElementById( "cName" ).value;
+				contactNumber = document.getElementById( "cNumber" ).value;
+				var gender = "";
+				if (document.getElementById( "genderm" ).checked) { gender = document.getElementById( "genderm" ).value; }
+				if (document.getElementById( "genderf" ).checked) { gender = document.getElementById( "genderf" ).value; }
+				
+				race = document.getElementById( "race" ).value;
+				dob = document.getElementById( "dob" ).value;
+				registrationID = document.getElementById( "rID" ).value;
+				nric = document.getElementById( "nric" ).value;
+				address = document.getElementById( "address" ).value;
+				relativeName = document.getElementById( "relativeName_family" ).value;
+			
+			if ( clientName != "" ) {
+				str += "Client Name: " + clientName;
+				str += newline;
+			}
+			if ( contactNumber != "" ) {
+				str += "Contact Number: " + contactNumber;
+				str += newline;
+			}
+			if ( gender != "" ) {
+				str += "Gender: " + gender;
+				str += newline;
+			}
+			
+			if ( race != "default" ) {
+				str += "Race: " + race;
+				str += newline;
+			}
+			if ( dob != "" ) {
+				str += "Registration Date: " + dob;
+				str += newline;
+			}
+			if ( registrationID != "" ) {
+				str += "Registration: " + registrationID;
+				str += newline;
+			}
+			if ( nric != "" ) {
+				str += "NRIC: " + nric;
+				str += newline;
+			}
+			if ( address != "" ) {
+				str += "Address: " + address;
+				str += newline;
+			}
+			
+			if ( relativeName != "" ) {
+				str += "Name of Relative: " + relativeName;
+				str += newline;
+			}
+			
+			alert( str );
+				}
+			</script>
+	<style>
+	</style>
+	</head>
+	<body><!--onload="hid()"-->
+		<form style="width:800px;" action="http://203.64.84.113/x/RQ_RS.aspx" method="post"  name="form1" >
+			<table  align="center" border="2" spacing="10" padding="2">
+				<tr>
+					<td colspan="4" align="center">
+						<h1>慢性腎臟病新病患護理檢查表格</h1>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 160px; height: 90px;" align="center">
+						<img src="https://1az2qm2bxvod1ae4oe1lp3es-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/SPE020_treatments.png" 
+							alt="Logo" style="width:100%;height:100%;">
+					</td>
+					<td>CLIENT NAME: &nbsp; <br/>
+						<input type="text" id="cName" maxlength="50" size="50" />
+					<br/>
+						CONTACT NUMBER: &nbsp; <br/>
+						<input type="text" id="cNumber" maxlength="20" size="20" >
+					<br/>
+						DATE OF BIRTH: &nbsp; <br/>
+						<input type="text" id="dob" maxlength="20" size="20" >
+					<br/>
+					</td>
+					<td>GENDER: &nbsp; <br/>
+						<input type="radio" id="genderm" name="gender" value="male">Male</input>
+						<input type="radio" id="genderf" name="gender" value="female">Female</input>
+					<br/>
+						RACE: &nbsp; <br/>
+						<SELECT id="race" size="1" name="Race">
+							<OPTION id="rDefault" name="race" value="default" selected>------</OPTION>
+							<OPTION id="rMalay" name="race" value="malay">Malay</OPTION>
+							<OPTION id="rChinese" name="race" value="chinese">Chinese</OPTION>
+							<OPTION id="rIndian" name="race" value="indian">Indian</OPTION>
+							<OPTION id="rOthers" name="race" value="others">Others</OPTION>
+						</SELECT>
+					<br/>
+					</td>
+					<td>DATE OF SCREENING: &nbsp; <br/>
+						<input type="date" id="rdate" name="rdate" onload="getDate()" > <!-- develop a getDate() at js -->
+					<br/>REGISTRATION ID: &nbsp; <br/>
+						<input type="text" id="rID" name="rID" maxlength="20" size="20" >
+					<br/>NRIC: &nbsp; <br/>
+						<input type="text" id="nric" name="nric" maxlength="20" size="20" >
+					<br/>	
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">ADDRESS: &nbsp; <br/>
+						<input type="text" id="address" name="address" maxlength="100" size="100">
+					<br/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<h1><b>FAMILY HISTORY: &nbsp;</b>
+						</h1>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<b>RELATIONSHIP</b>
+						<p>Name of relative &nbsp; 
+						<input type="text" id="relativeName_family" name="relativeName_family" maxLength="50" size="50" >
+						</p>
+					</td>
+				</tr>
+			</table>
+			<button type="button" onclick="alertForm()">Alert</button> 
+														&nbsp; <button type="button" onclick="loadPatient1()">loadPatient1</button>
+														&nbsp; <button type="button" onclick="loadPatient2()">loadPatient2</button>
+														&nbsp; <button type="button" onclick="getData()">getPatient</button>
+		</form>
+	</body>
+</html>	
