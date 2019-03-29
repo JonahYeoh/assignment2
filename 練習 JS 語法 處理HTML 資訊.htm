@@ -125,7 +125,6 @@
 				var wt, ht, result, alertext;
 				wt = document.getElementById( "wt" ).value;
 				ht = document.getElementById( "ht" ).value;
-				var newline = "\r\n";
 				if ( wt < 0 ) {
 					wstr += "Weight should not be negative value" + newline;
 				} // end inner if
@@ -145,9 +144,15 @@
 				} // end outer if
 				else { estr += "Field Height was empty" + newline; } // end else
 				// 整合output句子
-				rstr += newline;
-				wstr += newline;
-				estr += newline;
+				if ( rstr == "" ) {
+					rstr += newline;
+				} // end if
+				if ( wstr == "" ) {
+					wstr += newline;
+				} // end if
+				if ( estr == "" ) {
+					estr += newline;
+				} // end if
 				cstr = rstr + wstr + estr;
 				// 打印在alert窗口
 				alert( cstr );	
