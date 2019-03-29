@@ -292,17 +292,18 @@
 				if ( wt < 0 ) {
 					alert( "Field Weight should not contain negative value" );
 				} // end if
-				else if ( wt == 0 ) { alert( "Field Weight was empty" ); } // end else if
-				else { str += "Weight: " + wt + "kg" + newline; } // end else
+				else if ( wt > 0 ) { str += "Weight: " + wt + "kg" + newline; } // end else if
+				
 				if ( ht < 0 ) {
 					alert( "Field Height should not contain negative value" );
 				} // end if
-				else if ( ht >= 3 ) { 
-					alert( "Please enter Height in meter measurement" );
+				else if ( ht > 0 && ht < 3 ) { 
+					str += "Height: " + ht + "m" + newline;
 				} // end else if
-				else 
-				{ str += "Height: " + ht + "m" + newline; } // end else
-				if ( bmi != 0 ) {
+				else if ( ht > 3 ) { 
+					alert( "Height should be entered with meter measurement" ); 
+				} // end else
+				if ( bmi > 0 ) {
 					str += "BMI: " + bmi + newline;
 				} // end if
 				if ( chronicdm != "" ) {
