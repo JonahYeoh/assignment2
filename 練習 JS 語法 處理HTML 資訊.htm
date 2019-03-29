@@ -1,0 +1,661 @@
+	<html>
+		<head>
+			<title>慢性腎臟病新病患護理檢查表格</title>
+			<meta content="Microsoft FrontPage 5.0" name="GENERATOR">
+			<meta content="FrontPage.Editor.Document" name="ProgId">
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<script language="javascript">
+			var patient= {"name":"Chalmers", "telecom":12345678, "gender": "male", "birthDate": "1974-12-25", "race":"chinese", "address":"Taman Krsytal",
+							"nric":"6060", "registrationID":"123456789", "relativeName":"Boon Hua"};  
+			var patient2 = { "name":"123", "telecom":"abc", "gender":"default", "birthDate":"abc", "race":"default", "nric":"abcdefg" };
+			function loadPatient1() { // 帶入符合格式的資料
+				document.getElementById( "cName" ).value = patient.name;
+				document.getElementById( "cNumber" ).value = patient.telecom;
+				document.getElementById( "genderm" ).checked = patient.gender;
+				document.getElementById( "dob" ).value = patient.birthDate;
+				document.getElementById( "race" ).value = patient.race;
+				document.getElementById( "address" ).value = patient.address;
+				document.getElementById( "nric" ).value = patient.nric;
+				document.getElementById( "rID" ).value = patient.registrationID;
+				document.getElementById( "relativeName_family" ).value = patient.relativeName;
+			}
+			function loadPatient2() { // 帶入不符合格式的資料
+				document.getElementById( "cName" ).value = patient2.name;
+				document.getElementById( "cNumber" ).value = patient2.telecom;
+				document.getElementById( "dob" ).value = patient2.birthDate;
+				document.getElementById( "race" ).value = patient2.race;
+				document.getElementById( "nric" ).value = patient2.nric;
+			}
+			function alertForm() {
+				var j, k;
+				j = k = 0;
+				var newline = "\r\n";
+				var rstr = "";
+				var wstr = "";
+				var estr = "";
+				var cstr = "";
+				clientName = document.getElementById( "cName" ).value;
+				contactNumber = document.getElementById( "cNumber" ).value;
+				var gender = "";
+				if (document.getElementById( "genderm" ).checked) { gender = document.getElementById( "genderm" ).value; }
+				if (document.getElementById( "genderf" ).checked) { gender = document.getElementById( "genderf" ).value; }
+				race = document.getElementById( "race" ).value;
+				dob = document.getElementById( "dob" ).value;
+				registrationID = document.getElementById( "rID" ).value;
+				nric = document.getElementById( "nric" ).value;
+				address = document.getElementById( "address" ).value;
+				relativeName = document.getElementById( "relativeName_family" ).value;
+				// 防呆
+				if ( clientName != "" ) {
+					if ( isNaN(clientName) ) {
+						rstr += "Client Name was entered" + newline;
+					} // end inner if
+					else {
+						wstr += "Client Name was entered wrongly" + newline;
+					} // end inner else
+				} // end outer if
+				else {
+					estr += "Field Client Name was empty" + newline;
+				} // end outer else
+				if ( contactNumber != "" ) {
+					if ( isNaN(contactNumber) ) {
+						wstr += "Contact Number was entered wrongly" + newline;
+					} // end inner if
+					else { // end inner else
+						rstr += "Contact Number was entered" + newline;
+					} // end else
+				} // end outer if
+				else {
+					estr += "Field Contact Number was empty" + newline;
+				} // end outer else 
+				if ( gender == "male" || gender == "female" ) {
+					rstr += "Gender was entered" + newline;
+				} // end if
+				else {
+					estr += "Field Gender was empty" + newline;
+				} // end else
+				if ( race != "default" ) {
+					rstr += "Race was entered" + newline;
+				} // end if
+				else {
+					estr += "Field Race was empty" + newline;
+				} // end else
+				if ( dob != "" ) {
+					rstr += "Date of Birth was entered" + newline;
+				} // end if
+				else {
+					estr += "Field Date of Birth was empty" + newline;
+				} // end else
+				if ( registrationID != "" ) {
+					if ( isNaN( registrationID) ) {
+						wstr += "Registration ID was entered wrongly" + newline;
+					} // end inner if
+					else { 
+						rstr += "Registration ID was entered" + newline;
+					} // end inner else
+				} // end outer if
+				else {
+					estr += "Field Registration ID was empty" + newline;
+				} // end outer else
+				if ( nric != "" ) {
+					if ( isNaN( nric) ) {
+						wstr += "NRIC was entered wrongly" + newline;
+					} // end inner if
+					else { 
+						rstr += "NRIC was entered" + newline;
+					} // end inner else
+				} // end outer if
+				else {
+					estr += "Field NRIC was empty" + newline;
+				} // end outer else
+				if ( address == "" ) {
+					estr += "Field Address was empty" + newline;
+				} // end if
+				else {
+					rstr += "Address was entered" + newline;
+				} // end else
+				if ( relativeName == "" ) {
+					estr += "Field Name of Relative was empty" + newline;
+				} // end if
+				else { 
+					rstr += "Name Of Relative was entered" + newline;
+				} // end else
+				// BMI 程式分開寫方便維護工作
+				var wt, ht, result, alertext;
+				wt = document.getElementById( "wt" ).value;
+				ht = document.getElementById( "ht" ).value;
+				var newline = "\r\n";
+				if ( wt < 0 ) {
+					wstr += "Weight should not be negative value" + newline;
+				} // end inner if
+				else if ( wt > 0 ) {
+					rstr += "Weight was entered" + newline; 
+				} // end else if
+				else if ( wt == 0 ) {
+					estr += "Field Weight was empty" + newline;
+				} // end else if
+				if ( ht != 0 ) { 
+					if ( ht > 3 ) { 
+						wstr += "Please enter Height in meter measurement" + newline; 
+					} // end inner if
+					else if ( ht < 0 ) { 
+						wstr += "Height should not be negative value" + newline; 
+					} // end inner else
+				} // end outer if
+				else { estr += "Field Height was empty" + newline; } // end else
+				// 整合output句子
+				rstr += newline;
+				wstr += newline;
+				estr += newline;
+				cstr = rstr + wstr + estr;
+				// 打印在alert窗口
+				alert( cstr );	
+			} // end function alertForm
+			function getData() {
+				var str = ""; // 將被列印字串變數
+				var newline = "\r\n";
+				var clientName = document.getElementById( "cName" ).value;
+				var contactNumber = document.getElementById( "cNumber" ).value;
+				var gender = "";
+				// 從radio button取值
+				if (document.getElementById( "genderm" ).checked) { gender = document.getElementById( "genderm" ).value; }
+				if (document.getElementById( "genderf" ).checked) { gender = document.getElementById( "genderf" ).value; }
+				var race = document.getElementById( "race" ).value; // 從下拉選單取值
+				var dob = document.getElementById( "dob" ).value;
+				var registrationID = document.getElementById( "rID" ).value;
+				var nric = document.getElementById( "nric" ).value;
+				var address = document.getElementById( "address" ).value;
+				var relativeName = document.getElementById( "relativeName_family" ).value;
+				var wt = document.getElementById( "wt" ).value;
+				var ht = document.getElementById( "ht" ).value;
+				var bmi = document.getElementById( "bmi" ).value;
+				// 從checkbox取值
+				var chronicdm = "";
+					if ( document.getElementById( "chrdm_risk1" ).checked && document.getElementById( "chrdm_risk0" ).checked ) {
+						chronicdm += "Chronic Diabetes: " + document.getElementById( "chrdm_risk1" ).value + ", " + document.getElementById( "chrdm_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "chrdm_risk1" ).checked ) {
+						chronicdm += "Chronic Diabetes: " + document.getElementById( "chrdm_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "chrdm_risk0" ).checked ) {
+						chronicdm += "Chronic Diabetes: " + document.getElementById( "chrdm_risk0" ).value + newline;
+					} // end else if
+				var chronichtn = "";
+					if ( document.getElementById( "chrhtn_risk1" ).checked && document.getElementById( "chrhtn_risk0" ).checked ) {
+						chronichtn += "Chronic Hypertension: " + document.getElementById( "chrhtn_risk1" ).value + ", " + document.getElementById( "chrhtn_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "chrhtn_risk1" ).checked ) {
+						chronichtn += "Chronic Hypertension: " + document.getElementById( "chrhtn_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "chrhtn_risk0" ).checked ) {
+						chronichtn += "Chronic Hypertension: " + document.getElementById( "chrhtn_risk0" ).value + newline;
+					} // end else if
+				var oldAge = "";
+					if ( document.getElementById( ">65yearsold_risk1" ).checked && document.getElementById( ">65yearsold_risk0" ).checked ) {
+						oldAge += "Age More Than 65 Years Old: " + document.getElementById( ">65yearsold_risk1" ).value + ", " + document.getElementById( ">65yearsold_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( ">65yearsold_risk1" ).checked ) {
+						oldAge += "Age More Than 65 Years Old: " + document.getElementById( ">65yearsold_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( ">65yearsold_risk0" ).checked ) {
+						oldAge += "Age More Than 65 Years Old: " + document.getElementById( ">65yearsold_risk0" ).value + newline;
+					} // end else if
+				var fam_ckd5 = "";
+					if ( document.getElementById( "familyhistoryofCKD5_risk1" ).checked && document.getElementById( "familyhistoryofCKD5_risk0" ).checked ) {
+						fam_ckd5 += "Family History of CKD 5: " + document.getElementById( "familyhistoryofCKD5_risk1" ).value + ", " + document.getElementById( "familyhistoryofCKD5_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "familyhistoryofCKD5_risk1" ).checked ) {
+						fam_ckd5 += "Family History of CKD 5: " + document.getElementById( "familyhistoryofCKD5_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "familyhistoryofCKD5_risk0" ).checked ) {
+						fam_ckd5 += "Family History of CKD 5: " + document.getElementById( "familyhistoryofCKD5_risk0" ).value + newline;
+					} // end else if
+				var cardio_risk = "";
+					if ( document.getElementById( "cardiovasculardisease_risk1" ).checked && document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+						cardio_risk += "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk1" ).value + ", " + document.getElementById( "cardiovasculardisease_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "cardiovasculardisease_risk1" ).checked ) {
+						cardio_risk += "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+						cardio_risk += "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk0" ).value + newline;
+					} // end else if
+				var strucdisease_risk = "";
+					if ( document.getElementById( "structuraldisease_risk1" ).checked && document.getElementById( "structuraldisease_risk0" ).checked ) {
+						strucdisease_risk += "Structural Disease: " + document.getElementById( "structuraldisease_risk1" ).value + ", " + document.getElementById( "structuraldisease_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "structuraldisease_risk1" ).checked ) {
+						strucdisease_risk += "Structural Disease: " + document.getElementById( "structuraldisease_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+						strucdisease_risk += "Structural Disease: " + document.getElementById( "structuraldisease_risk0" ).value + newline;
+					} // end else if
+				var ophematuria_risk = "";
+					if ( document.getElementById( "opportunistichematuria1" ).checked && document.getElementById( "opportunistichematuria0" ).checked ) {
+						ophematuria_risk += "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria1" ).value + ", " + document.getElementById( "opportunistichematuria0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "opportunistichematuria1" ).checked ) {
+						ophematuria_risk += "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "opportunistichematuria0" ).checked ) {
+						ophematuria_risk += "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria0" ).value + newline;
+					} // end else if
+				var chrNephrototicDrug_risk = "";
+					if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked && document.getElementById( "opportunistichematuria0" ).checked ) {
+						chrNephrototicDrug_risk += "Chronic Use of NSAIDs or Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).value + ", " + document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked ) {
+						chrNephrototicDrug_risk += "Chronic Use of NSAIDs or Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).checked ) {
+						chrNephrototicDrug_risk += "Chronic Use of NSAIDs or Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).value + newline;
+					} // end else if
+				var multisystemdiseasePotentialKidneyInvolvement_risk = "";
+					if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).checked && document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).checked ) {
+						multisystemdiseasePotentialKidneyInvolvement_risk += "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).value + ", " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).value + newline;
+					} // end if
+					else if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).checked ) {
+						multisystemdiseasePotentialKidneyInvolvement_risk += "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).value + newline;
+					} // end else if
+					else if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).checked ) {
+						multisystemdiseasePotentialKidneyInvolvement_risk += "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).value + newline;
+					} // end else if
+				// 串接取到的值到變數str
+				if ( clientName != "" ) {
+					str += "Client Name: " + clientName + newline;
+				} // end if
+				if ( contactNumber != "" ) {
+					str += "Contact Number: " + contactNumber + newline;
+				} // end if
+				if ( gender != "" ) {
+					str += "Gender: " + gender + newline;
+				} // end if
+				if ( race != "default" ) {
+					str += "Race: " + race + newline;
+				} // end if
+				if ( dob != "" ) {
+					str += "Registration Date: " + dob + newline;
+				} // end if
+				if ( registrationID != "" ) {
+					str += "Registration: " + registrationID + newline;
+				} // end if 
+				if ( nric != "" ) {
+					str += "NRIC: " + nric + newline;
+				} // end if
+				if ( address != "" ) {
+					str += "Address: " + address + newline;
+				} // end if
+				if ( relativeName != "" ) {
+					str += "Name of Relative: " + relativeName + newline;
+				} // end if
+				if ( wt < 0 ) {
+					alert( "Field Weight should not contain negative value" );
+				} // end if
+				else if ( wt == 0 ) { alert( "Field Weight was empty" ); } // end else if
+				else { str += "Weight: " + wt + "kg" + newline; } // end else
+				if ( ht < 0 ) {
+					alert( "Field Height should not contain negative value" );
+				} // end if
+				else if ( ht >= 3 ) { 
+					alert( "Please enter Height in meter measurement" );
+				} // end else if
+				else 
+				{ str += "Height: " + ht + "m" + newline; } // end else
+				if ( bmi != 0 ) {
+					str += "BMI: " + bmi + newline;
+				} // end if
+				if ( chronicdm != "" ) {
+					str += chronicdm;
+				} // end if
+				else { newline; } // end else
+				if ( chronichtn != "" ) {
+					str += chronichtn;
+				} // end if
+				else { newline; }
+				if ( oldAge != "" ) {
+					str += oldAge;
+				} // end if
+				else { newline; } // end else
+				if ( fam_ckd5 != "" ) {
+					str += fam_ckd5;
+				} // end if
+				else { newline; } // end else
+				if ( cardio_risk != "" ) {
+					str += cardio_risk;
+				} // end if
+				else { newline; } // end else
+				if ( strucdisease_risk != "" ) {
+					str += strucdisease_risk;
+				} // end if
+				else { newline; } // end else
+				if ( ophematuria_risk != "" ) {
+					str += ophematuria_risk;
+				} // end if
+				else { newline; } // end else
+				if ( chrNephrototicDrug_risk != "" ) {
+					str += chrNephrototicDrug_risk;
+				} // end if 
+				else { newline; } // end else
+				if ( multisystemdiseasePotentialKidneyInvolvement_risk != "" ) {
+					str += multisystemdiseasePotentialKidneyInvolvement_risk;
+				} // end if 
+				else { newline; } // end else
+				// 打印在alert窗口
+				alert( str );
+			} // end function getData
+			function bmiCal() {
+				var wt, ht, result, alertext;
+				wt = document.getElementById( "wt" ).value;
+				ht = document.getElementById( "ht" ).value;
+				alertext = "";
+				var newline = "\r\n";
+				// 防呆， 在BMI計算機加防呆功能以方便用戶在發送表單前得到計算結果
+				if ( wt != 0 ) { 
+					if ( wt < 0 ) {
+						alertext += "Weight should not be negative value" + newline;
+					} // end inner if
+				} // end outer if
+				else {	alertext += "Field Weight was empty" + newline; } // end else
+				if ( ht != 0 ) { 
+					if ( ht > 3 ) { 
+						alertext += "Please enter Height in meter measurement" + newline; 
+					} // end inner if
+					else if ( ht < 0 ) { 
+						alertext += "Height should not be negative value" + newline; 
+					} // end inner else if 
+				} // end outer if
+				else { alertext += "Field Height was empty" + newline; } // end else
+				// 若有輸入錯誤， 計算機將不會執行計算
+				if ( alertext != "" ) {
+					alert( alertext );
+				} // end if 
+				else {
+					result = wt / ht / ht; // BMI計算機方程式
+					document.getElementById( "bmi" ).value = result;
+				} // end else
+			} // end function bmiCal
+
+			</script>
+	<style>
+	</style>
+	</head>
+	<body  onload="fillArray(), fruitlist()"><!--onload="hid()"-->
+		<form style="width:50%; float:left;" action="http://203.64.84.113/x/RQ_RS.aspx" method="post"  name="form1">
+			<table  align="center" border="2" spacing="10" padding="2" style="width:800px;">
+				<tr>
+					<td colspan="4" align="center">
+						<h1>慢性腎臟病新病患護理檢查表格</h1>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 160px; height: 90px;" align="center">
+						<img src="https://1az2qm2bxvod1ae4oe1lp3es-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/SPE020_treatments.png" 
+							alt="Logo" style="width:100%;height:100%;">
+					</td>
+					<td>CLIENT NAME: &nbsp; <br/>
+						<input type="text" id="cName" maxlength="50" size="50" />
+					<br/>
+						CONTACT NUMBER: &nbsp; <br/>
+						<input type="text" id="cNumber" maxlength="20" size="20" >
+					<br/>
+						DATE OF BIRTH: &nbsp; <br/>
+						<input type="text" id="dob" maxlength="20" size="20" >
+					<br/>
+					</td>
+					<td>GENDER: &nbsp; <br/>
+						<input type="radio" id="genderm" name="gender" value="male">Male</input>
+						<br/>	
+						<input type="radio" id="genderf" name="gender" value="female">Female</input>
+					<br/>
+						RACE: &nbsp; <br/>
+							<p id="racelist">
+							<script>
+									function fillArray() {
+										var race, text, rLen, i;
+										race = [ "race", "default", "malay", "chinese", "indian", "others" ];
+										rLen = race.length;
+
+										text = "<SELECT id=\"race\" name=\"race\" size=\"1\">";
+										for (i = 1; i < rLen; i++) {
+											text += "<option id=\"" + race[ 0 ] + "\"" + i + "\" name=\"" + race[ 0 ] + "\" value=\"" + race[ i ] + "\">" + race[ i ] + "</option>";
+										}
+										text += "</SELECT>";
+
+										document.getElementById("racelist").innerHTML = text;
+									}	
+							</script>
+					</p>
+					<br/>
+					</td>
+					<td>DATE OF SCREENING: &nbsp; <br/>
+						<input type="date" id="rdate" name="rdate" onload="getDate()" > <!-- develop a getDate() at js -->
+					<br/>REGISTRATION ID: &nbsp; <br/>
+						<input type="text" id="rID" name="rID" maxlength="20" size="20" >
+					<br/>NRIC: &nbsp; <br/>
+						<input type="text" id="nric" name="nric" maxlength="20" size="20" >
+					<br/>	
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">ADDRESS: &nbsp; <br/>
+						<input type="text" id="address" name="address" maxlength="100" size="100">
+					<br/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<h2><b>FAMILY HISTORY: &nbsp;</b>
+						</h2>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<b>RELATIONSHIP</b>
+						<p>Name of relative &nbsp; 
+						<input type="text" id="relativeName_family" name="relativeName_family" maxLength="50" size="50" >
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p id="fruitlist1">
+							<script>
+									function fruitlist() {
+										var fruits, text, fLen, i;
+										fruits = ["Banana", "Orange", "Apple", "Mango"];
+										fLen = fruits.length;
+
+										text = "<ul>";
+										for (i = 0; i < fLen; i++) {
+											text += "<li>" + fruits[i] + "</li>";
+										}
+										text += "</ul>";
+
+										document.getElementById("fruitlist1").innerHTML = text;
+									}
+							</script>
+						</p>
+					</td>
+					<td colspan="2">
+						<p>Weight: &nbsp;
+						<input id="wt" type="number" name="weight" value="0"></input></p>
+						<p>Height: &nbsp;
+						<input id="ht" type="number" name="height" value="0"></input></p>
+						<p>BMI: &nbsp;
+						<input id="bmi" type="text" name="bmi" value="0"></input></p>
+						<br>
+						&nbsp; <button type="button" onclick="bmiCal()">Calculate</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<form style="width:50%;float:left;" action="http://203.64.84.113/x/RQ_RS.aspx" method="post"  name="form2">
+			<table align="center" border="2" spacing="10" padding="2" style="width:800px;">
+				<tr>
+					<td colspan="2"><h2><b>Risk: </b></h2>
+					</td>
+				</tr>
+				<tr> 
+					<td style="width:50%;">
+							
+						<p><b>Chronic Diabetes: &nbsp; </b></p>
+							<input id="chrdm_risk1" type="checkbox" name="chronicdiabetes_risk" value="yes" >Yes &nbsp;
+							<input id="chrdm_risk0" type="checkbox" name="chronicdiabetes_risk" value="unknown">Unknown &nbsp;
+					</td>
+					<td>
+						<p><b>Chronic Hypertension: &nbsp; </b></p>
+							<input id="chrhtn_risk1" type="checkbox" name="chronichypertension_risk" value="yes" >Yes &nbsp;
+							<input id="chrhtn_risk0"type="checkbox" name="chronichypertension_risk" value="unknown">Unknown &nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><b>More than 65 Years Old: &nbsp; </b></p>
+							<input id=">65yearsold_risk1" type="checkbox" name=">65yearsold_risk" value="yes" >Yes &nbsp;
+							<input id=">65yearsold_risk0" type="checkbox" name=">65yearsold_risk" value="unknown">Unknown &nbsp;
+					</td>
+					<td>
+						<p><b>Family History Of CKD Stage 5: &nbsp; </b></p>
+							<input id="familyhistoryofCKD5_risk1" type="checkbox" name="familyhistoryofCKD5_risk" value="yes" >Yes &nbsp;</input>
+							<input id="familyhistoryofCKD5_risk0" type="checkbox" name="familyhistoryofCKD5_risk" value="unknown">Unknown &nbsp;</input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><b>Cardiovascular Disease: &nbsp; </b></p>
+							<input id="cardiovasculardisease_risk1" type="checkbox" name="cardiovasculardisease_risk" value="yes" >Yes &nbsp;</input>
+							<input id="cardiovasculardisease_risk0" type="checkbox" name="cardiovasculardisease_risk" value="unknown">Unknown &nbsp;</input>
+						
+					</td>
+					<td style="width:50%;">
+						<p><b>Structural Renal Tract Disease, Renal Calculi: &nbsp; </b></p>
+							<input id="structuraldisease_risk1" type="checkbox" name="structuraldisease_risk" value="yes" >Yes &nbsp;</input>
+							<input id="structuraldisease_risk0" type="checkbox" name="structuraldisease_risk" value="unknown">Unknown &nbsp;</input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><b>Opportunistic( Incidental ) Detection Of Hematuria: &nbsp; </b></p>
+							<input id="opportunistichematuria1" type="checkbox" name="opportunistichematuria_risk" value="yes" >Yes &nbsp;</input>
+							<input id="opportunistichematuria0" type="checkbox" name="opportunistichematuria_risk" value="unknown">Unknown &nbsp;</input>
+					</td>
+					<td>
+						<p><b>Chronic Use Of NSAID Or Other Nephrotoxic Drugs: &nbsp; </b></p>
+							<input id="chruseofnephrotoxicdrugs_risk1" type="checkbox" name="chronicuseofnephrotoxicdrugs_risk" value="yes" >Yes &nbsp;</input>
+							<input id="chruseofnephrotoxicdrugs_risk0" type="checkbox" name="chronicuseofnephrotoxicdrugs_risk" value="unknown">Unknown &nbsp;</input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p><b>Multisystem_D With Potential Kidney Involvement: &nbsp; </b></p>
+							<input id="multisystemdiseasewithpotentialkidneyinvolvement_risk1" type="checkbox" name="multisystemdiseasewithpotentialkidneyinvolvement_risk" value="yes" >Yes &nbsp;</input>
+							<input id="multisystemdiseasewithpotentialkidneyinvolvement_risk0" type="checkbox" name="multisystemdiseasewithpotentialkidneyinvolvement_risk" value="unknown">Unknown &nbsp;</input>
+					</td>
+					<td>
+					</td>
+				</tr>
+			</table>
+			<table align="center" border="2" spacing="10" padding="2" style="width:800px;">
+				<tr>
+					<td colspan="2">
+						<button type="button" onclick="showChecked()" >showChecked</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id="showChecked">...
+							<script>
+								function showChecked() {
+									var checkedList = document.forms[ 1 ];
+									var checkedArray = new Array;
+									var cLen = checkedList.length;
+									var str = "";
+									var i, j;
+									i = 0;
+									if ( document.getElementById( "chrdm_risk1" ).checked ) {
+										checkedArray[ i ] = "Chronic DM: " + document.getElementById( "chrdm_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "chrdm_risk0" ).checked ) {
+										checkedArray[ i ] = "Chronic DM: " + document.getElementById( "chrdm_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "chrhtn_risk1" ).checked ) {
+										checkedArray[ i ] = "Chronic Hypertension: " + document.getElementById( "chrhtn_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "chrhtn_risk0" ).checked ) {
+										checkedArray[ i ] = "Chronic Hypertension: " + document.getElementById( "chrhtn_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( ">65yearsold_risk1" ).checked ) {
+										checkedArray[ i ] = "More than 65 Years Old: " + document.getElementById( ">65yearsold_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( ">65yearsold_risk0" ).checked ) {
+										checkedArray[ i ] = "More than 65 Years Old: " + document.getElementById( ">65yearsold_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "familyhistoryofCKD5_risk1" ).checked ) {
+										checkedArray[ i ] = "Family History Of CKD Stage 5: " + document.getElementById( "familyhistoryofCKD5_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "familyhistoryofCKD5_risk0" ).checked ) {
+										checkedArray[ i ] = "Family History Of CKD Stage 5: " + document.getElementById( "familyhistoryofCKD5_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "cardiovasculardisease_risk1" ).checked ) {
+										checkedArray[ i ] = "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+										checkedArray[ i ] = "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "structuraldisease_risk1" ).checked ) {
+										checkedArray[ i ] = "Structural Disease: " + document.getElementById( "structuraldisease_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+										checkedArray[ i ] = "Structural Disease: " + document.getElementById( "structuraldisease_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "opportunistichematuria1" ).checked ) {
+										checkedArray[ i ] = "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "opportunistichematuria0" ).checked ) {
+										checkedArray[ i ] = "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked ) {
+										checkedArray[ i ] = "Chronic Use of Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).checked ) {
+										checkedArray[ i ] = "Chronic Use of Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).value;
+										i++;
+									}
+									if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).checked ) {
+										checkedArray[ i ] = "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).value;
+										i++;
+									}
+									if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).checked ) {
+										checkedArray[ i ] = "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).value;
+										i++;
+									}
+								document.getElementById( "showChecked" ).innerHTML = checkedArray.join();
+								}
+							</script>
+						</p>
+					</td>
+				</tr>
+			</table>
+			</table>
+			<button type="button" onclick="alertForm()">Alert</button> 
+														&nbsp; <button type="button" onclick="loadPatient1()">loadPatient1</button>
+														&nbsp; <button type="button" onclick="loadPatient2()">loadPatient2</button>
+														&nbsp; <button type="button" onclick="getData()">getPatient</button>
+		</form>
+	</body>
+</html>	
