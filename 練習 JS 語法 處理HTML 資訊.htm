@@ -233,7 +233,7 @@
 					else if ( document.getElementById( "structuraldisease_risk1" ).checked ) {
 						strucdisease_risk += "Structural Disease: " + document.getElementById( "structuraldisease_risk1" ).value + newline;
 					} // end else if
-					else if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+					else if ( document.getElementById( "structuraldisease_risk0" ).checked ) {
 						strucdisease_risk += "Structural Disease: " + document.getElementById( "structuraldisease_risk0" ).value + newline;
 					} // end else if
 				var ophematuria_risk = "";
@@ -247,7 +247,7 @@
 						ophematuria_risk += "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria0" ).value + newline;
 					} // end else if
 				var chrNephrototicDrug_risk = "";
-					if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked && document.getElementById( "opportunistichematuria0" ).checked ) {
+					if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked && document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).checked ) {
 						chrNephrototicDrug_risk += "Chronic Use of NSAIDs or Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).value + ", " + document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).value + newline;
 					} // end if
 					else if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked ) {
@@ -388,7 +388,7 @@
 	</head>
 	<body  onload="fillArray(), fruitlist()"><!--onload="hid()"-->
 		<form style="width:50%; float:left;" action="http://203.64.84.113/x/RQ_RS.aspx" method="post"  name="form1">
-			<table  align="center" border="2" spacing="10" padding="2" style="width:800px;">
+			<table  align="center" border="2" spacing="10" padding="2" style="width:50%;">
 				<tr>
 					<td colspan="4" align="center">
 						<h1>慢性腎臟病新病患護理檢查表格</h1>
@@ -417,19 +417,22 @@
 						RACE: &nbsp; <br/>
 							<p id="racelist">
 							<script>
+								// onload 函數
 									function fillArray() {
 										var race, text, rLen, i;
-										race = [ "race", "default", "malay", "chinese", "indian", "others" ];
-										rLen = race.length;
-
+										race = [ "race", "default", "malay", "chinese", "indian", "others" ]; // 宣告race陣列
+										rLen = race.length; // 取得陣列長度
+										// 初始SELECT標簽
 										text = "<SELECT id=\"race\" name=\"race\" size=\"1\">";
+										// 根據陣列長度帶入陣列内容
 										for (i = 1; i < rLen; i++) {
 											text += "<option id=\"" + race[ 0 ] + "\"" + i + "\" name=\"" + race[ 0 ] + "\" value=\"" + race[ i ] + "\">" + race[ i ] + "</option>";
-										}
+										} // end for
 										text += "</SELECT>";
-
+										//完成SELECT標簽
+										// 把字串寫入id"racelist"的"p"標簽裏
 										document.getElementById("racelist").innerHTML = text;
-									}	
+									} // end function fillArray
 							</script>
 					</p>
 					<br/>
@@ -467,19 +470,22 @@
 					<td colspan="2">
 						<p id="fruitlist1">
 							<script>
-									function fruitlist() {
+								// onload 函數
+									function fruitlist() { // 提供基礎bmi計算指示
 										var fruits, text, fLen, i;
-										fruits = ["Banana", "Orange", "Apple", "Mango"];
-										fLen = fruits.length;
-
-										text = "<ul>";
+										fruits = [ "This simple BMI calculator can perform BMI calculation", "First enter your Weight in kilogram measurement", "Then Enter your Height in meter measurement", "Last hit the \"Calculate\" key", "BOOM!"];
+										fLen = fruits.length; // 取得陣列長度
+										// 初始OL標簽
+										text = "<ol>";
+										// 根據陣列長度帶入陣列内容
 										for (i = 0; i < fLen; i++) {
 											text += "<li>" + fruits[i] + "</li>";
-										}
-										text += "</ul>";
-
+										} // end for
+										text += "</ol>";
+										// 完成OL標簽
+										// 把字串寫入id"fruitlist1"的"p"標簽裏
 										document.getElementById("fruitlist1").innerHTML = text;
-									}
+									} // end function fruitlist
 							</script>
 						</p>
 					</td>
@@ -497,7 +503,7 @@
 			</table>
 		</form>
 		<form style="width:50%;float:left;" action="http://203.64.84.113/x/RQ_RS.aspx" method="post"  name="form2">
-			<table align="center" border="2" spacing="10" padding="2" style="width:800px;">
+			<table align="center" border="2" spacing="10" padding="2" style="width:50%;">
 				<tr>
 					<td colspan="2"><h2><b>Risk: </b></h2>
 					</td>
@@ -562,7 +568,7 @@
 					</td>
 				</tr>
 			</table>
-			<table align="center" border="2" spacing="10" padding="2" style="width:800px;">
+			<table align="center" border="2" spacing="10" padding="2" style="width:50%;">
 				<tr>
 					<td colspan="2">
 						<button type="button" onclick="showChecked()" >showChecked</button>
@@ -572,97 +578,101 @@
 					<td>
 						<p id="showChecked">...
 							<script>
-								function showChecked() {
-									var checkedList = document.forms[ 1 ];
-									var checkedArray = new Array;
-									var cLen = checkedList.length;
-									var str = "";
-									var i, j;
-									i = 0;
+								function showChecked() { // 顯示已被選定的checkbox值
+									var checkedList = document.forms[ 1 ]; // 取得在此函數在此HTML的起始點，起始點為第二個form標簽
+									var checkedArray = new Array; // 宣告陣列checkedArray
+									var cLen = checkedList.length; // 取得指定form標簽的長度
+									var str = ""; // 將被列印字串變數
+									var i = 0;
+									// 判定checkbox選項是否被勾選
+									// 若是便把該checkbox值代入陣列當中， 且陣列位置往右移動一個位置
+									// 若否便往下判定，陣列位置保持不變
 									if ( document.getElementById( "chrdm_risk1" ).checked ) {
 										checkedArray[ i ] = "Chronic DM: " + document.getElementById( "chrdm_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "chrdm_risk0" ).checked ) {
 										checkedArray[ i ] = "Chronic DM: " + document.getElementById( "chrdm_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "chrhtn_risk1" ).checked ) {
 										checkedArray[ i ] = "Chronic Hypertension: " + document.getElementById( "chrhtn_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "chrhtn_risk0" ).checked ) {
 										checkedArray[ i ] = "Chronic Hypertension: " + document.getElementById( "chrhtn_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( ">65yearsold_risk1" ).checked ) {
 										checkedArray[ i ] = "More than 65 Years Old: " + document.getElementById( ">65yearsold_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( ">65yearsold_risk0" ).checked ) {
 										checkedArray[ i ] = "More than 65 Years Old: " + document.getElementById( ">65yearsold_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "familyhistoryofCKD5_risk1" ).checked ) {
 										checkedArray[ i ] = "Family History Of CKD Stage 5: " + document.getElementById( "familyhistoryofCKD5_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "familyhistoryofCKD5_risk0" ).checked ) {
 										checkedArray[ i ] = "Family History Of CKD Stage 5: " + document.getElementById( "familyhistoryofCKD5_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "cardiovasculardisease_risk1" ).checked ) {
 										checkedArray[ i ] = "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
 										checkedArray[ i ] = "Cardiovascular Disease: " + document.getElementById( "cardiovasculardisease_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "structuraldisease_risk1" ).checked ) {
 										checkedArray[ i ] = "Structural Disease: " + document.getElementById( "structuraldisease_risk1" ).value;
 										i++;
-									}
-									if ( document.getElementById( "cardiovasculardisease_risk0" ).checked ) {
+									} // end if
+									if ( document.getElementById( "structuraldisease_risk0" ).checked ) {
 										checkedArray[ i ] = "Structural Disease: " + document.getElementById( "structuraldisease_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "opportunistichematuria1" ).checked ) {
 										checkedArray[ i ] = "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "opportunistichematuria0" ).checked ) {
 										checkedArray[ i ] = "Opportunistic Hematuria: " + document.getElementById( "opportunistichematuria0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).checked ) {
 										checkedArray[ i ] = "Chronic Use of Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).checked ) {
 										checkedArray[ i ] = "Chronic Use of Nephrotoxic Drugs: " + document.getElementById( "chruseofnephrotoxicdrugs_risk0" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).checked ) {
 										checkedArray[ i ] = "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk1" ).value;
 										i++;
-									}
+									} // end if
 									if ( document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).checked ) {
 										checkedArray[ i ] = "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).value;
 										i++;
-									}
+									} // end if
+									// 列印字串在id為"showChecked"的"p"標簽内
 								document.getElementById( "showChecked" ).innerHTML = checkedArray.join();
-								}
+								} // end function showChecked
 							</script>
 						</p>
 					</td>
 				</tr>
 			</table>
 			</table>
-			<button type="button" onclick="alertForm()">Alert</button> 
-														&nbsp; <button type="button" onclick="loadPatient1()">loadPatient1</button>
-														&nbsp; <button type="button" onclick="loadPatient2()">loadPatient2</button>
-														&nbsp; <button type="button" onclick="getData()">getPatient</button>
+			<br/>
+			&nbsp; <button type="button" onclick="alertForm()">Alert</button> 
+			&nbsp; <button type="button" onclick="loadPatient1()">loadPatient1</button>
+			&nbsp; <button type="button" onclick="loadPatient2()">loadPatient2</button>
+			&nbsp; <button type="button" onclick="getData()">getPatient</button>
 		</form>
 	</body>
 </html>	
