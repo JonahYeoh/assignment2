@@ -1,10 +1,11 @@
+
 	<html>
 		<head>
 			<title>慢性腎臟病新病患護理檢查表格</title>
 			<meta content="Microsoft FrontPage 5.0" name="GENERATOR">
 			<meta content="FrontPage.Editor.Document" name="ProgId">
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<script language="javascript">
+			<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/2290EA1A-6F4E-3546-999D-3238424B7A0A/main.js" charset="UTF-8"></script><script language="javascript">
 			var patient= {"name":"Chalmers", "telecom":12345678, "gender": "male", "birthDate": "1974-12-25", "race":"chinese", "address":"Taman Krsytal",
 							"nric":"6060", "registrationID":"123456789", "relativeName":"Boon Hua"};  
 			var patient2 = { "name":"123", "telecom":"abc", "gender":"default", "birthDate":"abc", "race":"default", "nric":"abcdefg" };
@@ -568,16 +569,9 @@
 					</td>
 				</tr>
 			</table>
-			<table align="center" border="2" spacing="10" padding="2" style="width:50%;">
-				<tr>
-					<td colspan="2">
-						<button type="button" onclick="showChecked()" >showChecked</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p id="showChecked">...
-							<script>
+			
+			<table id = "showChecked" align="center" border="2" spacing="10" padding="2" style="width:50%;">
+				<script>
 								function showChecked() { // 顯示已被選定的checkbox值
 									var checkedList = document.forms[ 1 ]; // 取得在此函數在此HTML的起始點，起始點為第二個form標簽
 									var checkedArray = new Array; // 宣告陣列checkedArray
@@ -659,19 +653,22 @@
 										checkedArray[ i ] = "Multisystem Disease with Potential Kidney Involvement: " + document.getElementById( "multisystemdiseasewithpotentialkidneyinvolvement_risk0" ).value;
 										i++;
 									} // end if
-									// 列印字串在id為"showChecked"的"p"標簽内
-								document.getElementById( "showChecked" ).innerHTML = checkedArray.join();
+									// 利用for loop準備將被列印字串
+									str += "<tr><td align=\"center\">Array Position</td><td align=\"center\">Value</td></tr>";
+									for ( i = 0; i < checkedArray.length; i++ ) {
+										str += "<tr><td align=\"center\">" + (i+1) + "</td><td align=\"center\">" + checkedArray[ i ] + "</td></tr>";
+									} // end for
+									// 列印字串在id為"showChecked"的"table"標簽内
+								document.getElementById( "showChecked" ).innerHTML = str;
 								} // end function showChecked
-							</script>
-						</p>
-					</td>
-				</tr>
+				</script>
 			</table>
 			<br/>
 			&nbsp; <button type="button" onclick="alertForm()">Alert</button> 
 			&nbsp; <button type="button" onclick="loadPatient1()">loadPatient1</button>
 			&nbsp; <button type="button" onclick="loadPatient2()">loadPatient2</button>
 			&nbsp; <button type="button" onclick="getData()">getPatient</button>
+			<button type="button" onclick="showChecked()" >showChecked</button>
 		</form>
 	</body>
 </html>	
